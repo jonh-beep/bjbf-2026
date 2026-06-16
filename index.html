@@ -83,6 +83,9 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f0ece4;min-heigh
 .fv-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
 .fv-nm{font-weight:700;font-size:.8rem}
 .fv-ct{font-size:.69rem;color:#6b7280;margin-left:auto}
+.pg-row{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-top:1px solid #f0ece4}
+.pg-date{font-size:.82rem;font-weight:700;color:#0c1a2e}
+.pg-sub{font-size:.7rem;font-weight:400;font-style:italic;color:#8b7355}
 .leg{padding:10px 12px;background:#0c1a2e}
 .leg h3{font-size:.63rem;color:#e8c87a;font-weight:700;margin-bottom:5px;letter-spacing:.05em}
 .legrow{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:5px}
@@ -119,7 +122,7 @@ var BD={"Al Nicholls Quartet":"Swinging, warm-toned tenor sax in the 1940s–50s
 
 /* ── state ── */
 var state={members:null,colors:null,picks:null,me:null};
-var uiDay="0",uiGf={},uiExp=-1,uiView="cal",uiCopied=false;
+var uiDay="0",uiGf={},uiExp=-1,uiView="cal",uiCopied=false,uiPerfExp=null;
 
 /* ── URL encoding ── */
 function encSt(){try{return btoa(JSON.stringify({m:state.members,c:state.colors,p:state.picks}));}catch(e){return "";}}
@@ -188,7 +191,7 @@ function confirmSetup(){
 }
 
 /* ── main draw ── */
-function draw(){renderMbar();renderNav();if(uiView==="cal")renderCal();else if(uiView==="my")renderMy();else renderFam();renderLeg();}
+function draw(){renderMbar();renderNav();if(uiView==="cal")renderCal();else if(uiView==="my")renderMy();else if(uiView==="fam")renderFam();else renderPerf();renderLeg();}
 
 /* ── member bar ── */
 function renderMbar(){
@@ -207,7 +210,7 @@ function renderNav(){
   var navy="#0c1a2e",gold="#e8c87a";
   var myC=state.me&&state.picks[state.me]?state.picks[state.me].length:0;
   function nb(lbl,v){var a=uiView===v;return "<button class='mnbtn' onclick='sv(\""+v+"\")' style='background:"+(a?gold:"transparent")+";color:"+(a?navy:"#94a3b8")+";border:none'>"+lbl+"</button>";}
-  document.getElementById("mn").innerHTML=nb("&#128197; Calendar","cal")+nb("&#9733; My Picks"+(myC?" ("+myC+")":""),"my")+nb("&#128106; Family View","fam");
+  document.getElementById("mn").innerHTML=nb("&#128197; Calendar","cal")+nb("&#9733; My Picks"+(myC?" ("+myC+")":""),"my")+nb("&#128106; Family View","fam")+nb("&#127908; Performers","perf");
 }
 
 /* ── calendar ── */
@@ -289,6 +292,53 @@ function renderFam(){
     });
     h+="</div>";
   }
+  document.getElementById("ct").innerHTML=h;
+}
+
+/* ── performers view ── */
+function renderPerf(){
+  var pm={};
+  for(var i=0;i<R.length;i++){var n=R[i][3];if(!pm[n])pm[n]=[];pm[n].push(i);}
+  var names=Object.keys(pm).sort(function(a,b){return a.localeCompare(b);});
+  var h="<div class='ph'><h2>Performers &mdash; "+names.length+" acts</h2></div>";
+  h+="<div style='padding:4px 10px 20px'>";
+  names.forEach(function(name){
+    var idxs=pm[name];
+    var isExp=uiPerfExp===name;
+    var bio=BD[name]||"";
+    h+="<div class='card' style='margin-bottom:6px'>";
+    h+="<div class='cmain' data-p='"+he(name)+"' onclick='tperf(this.dataset.p)'>";
+    h+="<div class='inf'><div class='an'>"+he(name)+"</div>";
+    h+="<div class='vn'>"+idxs.length+" performance"+(idxs.length!==1?"s":"")+"</div></div>";
+    h+="<span style='font-size:.9rem;color:#94a3b8;flex-shrink:0'>"+(isExp?"&#9650;":"&#9660;")+"</span>";
+    h+="</div>";
+    if(isExp){
+      h+="<div class='expbox'>";
+      if(bio)h+="<div class='bio'>"+he(bio)+"</div>";
+      var sorted=idxs.slice().sort(function(a,b){
+        var da=parseInt(R[a][0],10),db=parseInt(R[b][0],10);
+        if(da!==db)return da-db;return R[a][1].localeCompare(R[b][1]);
+      });
+      sorted.forEach(function(idx){
+        var e=R[idx],di=null;
+        for(var k=0;k<DS.length;k++){if(DS[k][0]===e[0]){di=DS[k];break;}}
+        var gv=G[e[4]],p=e[5],fr=isFree(p),isInc=p==="Incl.";
+        var pBg=fr?"#d1fae5":(isInc?"#f3f4f6":"#dbeafe");
+        var pCol=fr?"#065f46":(isInc?"#374151":"#1e40af");
+        h+="<div class='pg-row'>";
+        h+="<div class='tb'><div class='ti'>"+he(e[1])+"</div><div class='gi'>"+gv.e+"</div></div>";
+        h+="<div class='inf'>";
+        h+="<div class='pg-date'>"+he(di?di[1]:"")+(di&&di[2]?" <span class='pg-sub'>"+he(di[2])+"</span>":"")+"</div>";
+        h+="<div class='vn'>"+he(e[2])+"</div>";
+        h+="</div>";
+        h+="<span class='prtag' style='background:"+pBg+";color:"+pCol+"'>"+he(p)+"</span>";
+        h+="</div>";
+      });
+      h+="</div>";
+    }
+    h+="</div>";
+  });
+  h+="</div>";
   document.getElementById("ct").innerHTML=h;
 }
 
@@ -379,6 +429,7 @@ function sd(d){uiDay=d;uiExp=-1;draw();}
 function tg(k){if(uiGf[k])delete uiGf[k];else uiGf[k]=true;draw();}
 function cg(){uiGf={};draw();}
 function te(i){uiExp=(uiExp===i)?-1:i;draw();}
+function tperf(n){uiPerfExp=(uiPerfExp===n)?null:n;renderPerf();}
 function tf(i){
   if(!state.me)return;
   var a=state.picks[state.me]||(state.picks[state.me]=[]);

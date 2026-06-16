@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>42nd Birmingham Jazz &amp; Blues Festival 2026 &#8212; Family Picks</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0ece4;min-height:100vh}
+#app{max-width:740px;margin:0 auto}
+.hdr{background:#0c1a2e;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hdr h1{color:#e8c87a;font-size:.88rem;font-weight:800;letter-spacing:.04em;line-height:1.2}
+.hdr p{font-size:.62rem;color:#94a3b8;margin-top:2px}
+.share-btn{padding:6px 11px;background:transparent;border:1.5px solid #e8c87a;color:#e8c87a;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:600;white-space:nowrap;flex-shrink:0}
+.share-btn:hover{background:#e8c87a;color:#0c1a2e}
+.mbar{background:#1a2f50;padding:7px 12px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.mbar-lbl{font-size:.67rem;color:#94a3b8;flex-shrink:0}
+.mpill{padding:3px 11px;border-radius:999px;font-size:.72rem;font-weight:600;cursor:pointer;border-width:2px;border-style:solid;transition:all .15s}
+.madd{padding:3px 10px;border-radius:999px;font-size:.7rem;cursor:pointer;background:transparent;border:1.5px dashed #4b5563;color:#9ca3af;line-height:1.4}
+.madd:hover{border-color:#94a3b8;color:#cbd5e1}
+.mainnav{display:flex;background:#162038;border-bottom:2px solid #e8c87a}
+.mnbtn{flex:1;padding:9px;border:none;cursor:pointer;font-size:.79rem;font-weight:600;transition:background .15s,color .15s}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.setup-box{background:#fff;border-radius:12px;padding:24px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.setup-box h2{color:#0c1a2e;font-size:1.05rem;margin-bottom:6px}
+.setup-box p{font-size:.8rem;color:#6b7280;margin-bottom:18px;line-height:1.5}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.mopt{padding:10px;border-radius:8px;border:2px solid #e2d9cc;cursor:pointer;text-align:center;transition:all .15s}
+.mopt:hover{border-color:#0c1a2e}
+.crow{display:flex;gap:8px;margin-top:4px}
+.crow input{flex:1;padding:8px 10px;border:1.5px solid #e2d9cc;border-radius:6px;font-size:.8rem;outline:none}
+.crow input:focus{border-color:#1e40af}
+.crow button{padding:8px 14px;background:#0c1a2e;color:#e8c87a;border:none;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600}
+.okbtn{width:100%;padding:11px;background:#0c1a2e;color:#e8c87a;border:none;border-radius:8px;cursor:pointer;font-size:.88rem;font-weight:700;margin-top:14px}
+.okbtn:disabled{opacity:.35;cursor:not-allowed}
+.days{display:flex;overflow-x:auto;background:#1e3057;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.dbtn{flex-shrink:0;padding:7px 10px;border:none;cursor:pointer;font-size:.67rem;line-height:1.4;white-space:nowrap;background:transparent;color:#94a3b8}
+.dbtn .ds{font-size:.57rem;opacity:.8;display:block}
+.gfrow{display:flex;flex-wrap:wrap;gap:5px;padding:7px 10px;background:#f7f3ec;border-bottom:1px solid #e0d8cc;align-items:center}
+.gflbl{font-size:.67rem;color:#8b7355;margin-right:2px;flex-shrink:0}
+.gpill{padding:2px 9px;border-radius:999px;font-size:.66rem;font-weight:600;cursor:pointer;border-width:1.5px;border-style:solid;background:transparent;transition:all .12s}
+.clrbtn{font-size:.68rem;color:#ef4444;background:none;border:none;cursor:pointer;padding:2px 4px}
+.dayh{padding:8px 12px 3px}
+.dayh-t{font-size:.93rem;font-weight:700;color:#0c1a2e;display:block}
+.dayh-s{font-size:.67rem;color:#8b7355;font-style:italic}
+.dayh-c{font-size:.66rem;color:#9ca3af;margin-top:2px;display:block}
+.evlist{padding:4px 10px 20px}
+.card{background:#fff;border-radius:8px;margin-bottom:7px;overflow:hidden}
+.cmain{display:flex;align-items:flex-start;padding:8px 10px;gap:8px;cursor:pointer}
+.tb{flex-shrink:0;min-width:36px;text-align:center}
+.ti{font-size:.76rem;font-weight:700;color:#0c1a2e}
+.gi{font-size:.78rem;margin-top:2px}
+.inf{flex:1;min-width:0}
+.an{font-size:.86rem;font-weight:700;color:#0c1a2e;line-height:1.3}
+.vn{font-size:.68rem;color:#6b7280;margin-top:1px}
+.prtag{flex-shrink:0;font-size:.65rem;padding:2px 6px;border-radius:4px;font-weight:600;align-self:flex-start;margin-top:2px}
+.srow{display:flex;align-items:center;gap:3px;flex-shrink:0}
+.sbtn{background:none;border:none;cursor:pointer;font-size:1.05rem;padding:1px;line-height:1;color:#d1d5db;transition:color .12s}
+.expbox{padding:0 10px 10px;border-top:1px solid #f0ece4;background:#fdfcfa}
+.exprow{padding:8px 0 4px;display:flex;flex-wrap:wrap;gap:6px}
+.gbadge{display:inline-block;padding:2px 9px;border-radius:4px;font-size:.66rem;font-weight:600}
+.expnote{font-size:.7rem;color:#92400e;font-style:italic;padding:2px 0 4px;background:#fef3c7;border-radius:4px;padding:3px 8px;margin-top:2px}
+.bio{font-size:.76rem;color:#374151;line-height:1.58;margin:7px 0 5px}
+.vblock{background:#f7f3ec;border-radius:6px;padding:8px 10px;margin-top:6px}
+.vb-name{font-weight:700;color:#0c1a2e;font-size:.8rem;margin-bottom:2px}
+.vb-addr{font-size:.72rem;color:#4b5563}
+.vb-phone{font-size:.69rem;color:#6b7280;margin-top:2px}
+.vlinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.vl{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:.67rem;font-weight:600;text-decoration:none;border:1.5px solid;transition:all .12s}
+.vl-g{color:#1e40af;border-color:#1e40af}.vl-g:hover{background:#1e40af;color:#fff}
+.vl-a{color:#374151;border-color:#374151}.vl-a:hover{background:#374151;color:#fff}
+.vl-w{color:#065f46;border-color:#065f46}.vl-w:hover{background:#065f46;color:#fff}
+.wdots{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}
+.wdot{display:inline-block;padding:1px 7px;border-radius:999px;font-size:.6rem;font-weight:700;color:#fff}
+.ph{padding:10px 13px;border-bottom:1px solid #e0d8cc;background:#f7f3ec;display:flex;justify-content:space-between;align-items:center}
+.ph h2{font-weight:700;color:#0c1a2e;font-size:.88rem}
+.copybtn{padding:6px 11px;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.74rem;font-weight:600}
+.empty{padding:34px;text-align:center;color:#94a3b8;font-size:.82rem}
+.dlbl{padding:7px 4px 3px;font-size:.67rem;font-weight:700;color:#8b7355;letter-spacing:.05em;text-transform:uppercase}
+.noevent{padding:26px;text-align:center;color:#94a3b8;font-size:.82rem}
+.fv-m{display:flex;align-items:center;gap:8px;padding:7px 13px;border-top:1px solid #e0d8cc}
+.fv-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.fv-nm{font-weight:700;font-size:.8rem}
+.fv-ct{font-size:.69rem;color:#6b7280;margin-left:auto}
+.leg{padding:10px 12px;background:#0c1a2e}
+.leg h3{font-size:.63rem;color:#e8c87a;font-weight:700;margin-bottom:5px;letter-spacing:.05em}
+.legrow{display:flex;flex-wrap:wrap;gap:4px 12px;margin-bottom:5px}
+.lgi{font-size:.66rem;color:#cbd5e1;display:flex;align-items:center;gap:3px}
+.lgb{padding:1px 5px;border-radius:3px;font-weight:600;font-size:.61rem}
+.legprow{display:flex;flex-wrap:wrap;gap:4px 13px}
+.legp{font-size:.65rem;color:#94a3b8}
+</style>
+</head>
+<body>
+<div id="ov" class="overlay" style="display:none"></div>
+<div id="app">
+  <div class="hdr">
+    <div>
+      <h1>42ND BIRMINGHAM JAZZ &amp; BLUES FESTIVAL 2026</h1>
+      <p>24 July &ndash; 2 August 2026 &bull; Mostly Free &bull; birminghamjazzfestival.com</p>
+    </div>
+    <button class="share-btn" onclick="shareLink()">&#128279; Share link</button>
+  </div>
+  <div class="mbar" id="mbar"></div>
+  <div class="mainnav" id="mn"></div>
+  <div id="ct"></div>
+  <div id="lg" class="leg"></div>
+</div>
+<script>
+var DM=["Jonny","Chris","Mum","Dad"];
+var MC={"Jonny":"#1e40af","Chris":"#065f46","Mum":"#7c3aed","Dad":"#b45309"};
+var MB={"Jonny":"#dbeafe","Chris":"#d1fae5","Mum":"#ede9fe","Dad":"#fef3c7"};
+var G={"j":{"e":"🎷","l":"Jazz & Swing","c":"#7c2d12","bg":"#fef3c7"},"b":{"e":"🎸","l":"Blues & Rock","c":"#1e3a5f","bg":"#dbeafe"},"o":{"e":"🎹","l":"Boogie & New Orleans","c":"#581c87","bg":"#f3e8ff"},"g":{"e":"🎻","l":"Gypsy Jazz","c":"#14532d","bg":"#dcfce7"},"w":{"e":"🌍","l":"World & Latin","c":"#164e63","bg":"#cffafe"},"s":{"e":"⭐","l":"Special Event","c":"#831843","bg":"#fce7f3"}};
+var DS=[["0","Thu 23 Jul","Eve of Festival"],["1","Fri 24 Jul",""],["2","Sat 25 Jul",""],["3","Sun 26 Jul",""],["4","Mon 27 Jul",""],["5","Tue 28 Jul","Tuesday is Bluesday"],["6","Wed 29 Jul",""],["7","Thu 30 Jul","Buddy Guy Day 🎂"],["8","Fri 31 Jul",""],["9","Sat 1 Aug",""],["10","Sun 2 Aug","Final Day"]];
+var R=[["0","12:30","Wednesbury Library","Honeyboy Hickling Blues Band","b","FREE"],["0","18:15","West Midlands Police Museum","Jazz & Blues Murder Mystery Night","s","£26+","Book: trybooking.com/uk/GMIZ. Teams up to 6; over-18s only."],["0","20:00","CBSO Centre","Miho Hazama (Japan/USA)","j","£15"],["1","12:00","The Exchange","Stacy Mitchhart (USA)","b","FREE"],["1","12:30","Silver Tree Bakery, Sutton Coldfield","Hot Club of Halifax","j","FREE"],["1","12:30","Chamberlain Square","Jump Jive & Wail","j","FREE"],["1","14:30","Delta by Marriott","Alan Barnes Quartet","j","FREE"],["1","17:00","The Brasshouse","Royal Blues","b","FREE"],["1","18:00","Snobs","Honeyboy Hickling Blues Band","b","FREE"],["1","18:00","1000 Trades on the Park","The Buskateers","b","FREE"],["1","18:30","The Cosy Club","Jump Jive & Wail","j","FREE"],["1","18:30","Cote, Solihull","Jake Henry","j","FREE"],["1","19:00","Regina's Bar & Restaurant","Stacy Mitchhart (USA)","b","FREE"],["1","19:00","Bacchus Bar","Smokin' Ade Wakelin & Andy Hiseman","b","FREE"],["1","19:00","Museum Collection Centre","Brad Henshaw","o","£12"],["1","19:00","West Bromwich Indoor Market","The Sax Pistols","j","FREE"],["1","19:30","Wednesbury Museum & Art Gallery","Playing Django","g","FREE"],["1","19:30","Terrace Suite, Botanical Gardens","King Pleasure & The Biscuit Boys","j","£25"],["1","19:30","Barbara's Bier Haus","Back on the Road","b","FREE"],["1","19:30","Blackheath Library","Alan Barnes Quartet","j","FREE"],["1","20:00","Plough & Harrow Hotel","Hit Parade Heroes","b","FREE"],["1","20:00","Fighting Cocks, Moseley","Hot Club of Halifax","j","FREE"],["2","11:00","Birmingham Indoor Market","B.D. Lenz (USA)","b","FREE"],["2","12:00","Wednesbury Museum & Art Gallery","Jump Jive & Wail","j","FREE"],["2","12:00","Caffe Nero, Brindleyplace","Strictly Jitterbug","j","FREE"],["2","12:30","Chamberlain Square","Hot Club of Halifax","j","FREE"],["2","13:00","Sandwell Valley Visitor Centre","Alan Barnes Quartet","j","FREE"],["2","13:00","Bullring Rag Market","Stacy Mitchhart (USA)","b","FREE"],["2","13:00","Central Square, Brindleyplace","Singitbig","j","FREE"],["2","13:30","Bournville Village Green","The Delta Aces","b","FREE"],["2","14:00","Birmingham Markets Customer Centre","Playing Django","g","FREE"],["2","14:30","Botanical Gardens","Jukebox Rhythm Orchestra","j","£10+"],["2","15:00","AC Hotel Mailbox","Walter Smitty & The Unviables","j","FREE"],["2","15:00","The Brasshouse","Tipitina","o","FREE"],["2","15:00","Arcadian","Royal Blues","b","FREE"],["2","16:00","Bournville Village Green","Smokin' Ade Wakelin & Andy Hiseman","b","FREE"],["2","17:00","Snobs","Hot Club of Halifax","j","FREE"],["2","17:00","The Duke Inn, Sutton Coldfield","Roy Forbes","j","FREE"],["2","18:30","New Inn Harborne","Walter Smitty & The Unviables","j","FREE"],["2","19:00","Noel's Bar & Restaurant","The Delta Aces","b","FREE"],["2","19:00","Omnom, Jewellery Quarter","Stacy Mitchhart (USA)","b","FREE"],["2","19:00","Winterbourne House & Garden","Alan Barnes Quartet","j","£20+"],["2","19:30","Barbara's Bier Haus","Royal Blues","b","FREE"],["2","19:30","West Bromwich Central Library","Tipitina","o","FREE"],["2","20:00","Plough & Harrow Hotel","Jump Jive & Wail","j","FREE"],["2","20:00","The Wellington","B.D. Lenz (USA)","b","FREE"],["3","11:00","Vieni, Jewellery Quarter","Hot Club of Halifax","j","FREE"],["3","12:30","Chamberlain Square","Tipitina","o","FREE"],["3","12:30","Harvey Norman, Sutton Coldfield","John Hemming & The Jazz Lobbyists","j","FREE"],["3","13:00","Noel's Bar & Restaurant","Walter Smitty","j","FREE"],["3","13:00","Bantock House, Wolverhampton","Playing Django","g","FREE"],["3","13:45","Old Joint Stock","Sheila Waterfield","j","FREE"],["3","14:00","Bournville Gardens Village","Jake Leg Jug Band","j","FREE"],["3","14:00","Earlsdon Park Village","Roy Forbes Quartet","j","FREE"],["3","14:00","Red Lion, West Bromwich","Honeyboy Hickling Blues Band","b","FREE"],["3","14:00","Haden Hill House","Slide Boy Roy","b","FREE"],["3","14:00","Cote, Solihull","Tom Lindsay","j","FREE"],["3","14:30","Botanical Gardens","Rich Dickinson's Driving Force","b","£10+"],["3","15:00","The Brasshouse","The Sax Pistols","j","FREE"],["3","15:00","Saint Paul's Market, Jewellery Quarter","Jump Jive & Wail","j","FREE"],["3","17:00","All Bar One","Hot Club of Halifax","j","FREE"],["3","18:00","O'Neill's, Broad Street","Tipitina","o","FREE"],["3","18:00","Bar Estilo","Tom Lindsay","j","FREE"],["3","20:00","Snobs","Jump Jive & Wail","j","FREE"],["4","11:00","Victorian Tea Rooms, Sutton Coldfield","Walter Smitty","j","FREE"],["4","12:30","Water's Edge Bandstand","Brad Henshaw","o","FREE"],["4","13:00","New Square, West Bromwich","Jake Leg Jug Band","j","FREE"],["4","14:30","Box, Brindleyplace","You're Never Alone With A Uke","s","FREE"],["4","16:30","Dishoom","Django Chutney","g","FREE"],["4","19:30","Great Bridge Library","Hit Parade Heroes","b","FREE"],["4","20:00","Snobs","B.D. Lenz (USA)","b","FREE"],["5","11:00","Plough & Harrow Hotel","Photography Workshop","s","FREE","Free workshop with festival photographer Merlin Daleman. All levels welcome."],["5","12:30","Water's Edge Bandstand","James Oliver Band","b","FREE"],["5","13:00","School of Art, BCU","Chickenbone John & Harmonica Dave","b","FREE"],["5","13:00","Caffe Botanico, Sutton Coldfield","Django Chutney","g","FREE"],["5","14:00","Snobs","Slide Boy Roy","b","FREE"],["5","17:00","Snobs","James Oliver Band","b","FREE"],["5","18:00","Cow & Sow","Walter Smitty","j","FREE"],["5","18:00","Samai Thai","Hit Parade Heroes","b","FREE"],["5","19:00","Box, Brindleyplace","Birmingham: A City Rooted in Talent","s","FREE","Documentary film screening by D.G. Torrens & Martin Tracey."],["5","19:00","Hilton Garden Inn","Django Chutney","g","FREE"],["5","19:30","Novotel","Anvil Chorus","j","FREE"],["5","19:30","Wednesbury Library","Andres Roots (Estonia)","b","FREE"],["5","19:30","Radisson Blu","Honeyboy Hickling Blues Band","b","FREE"],["5","20:00","Snobs","Dirt Road Band","b","FREE"],["6","12:30","Water's Edge Bandstand","Jake Leg Jug Band","j","FREE"],["6","12:30","Moseley All Services Club","Birmingham Big Band with Suzi Woods","j","£8"],["6","12:30","The Queen's Head, Steelhouse Lane","Django Chutney","g","FREE"],["6","13:00","Alexandra Theatre Piano Bar","The Shakedown Brothers","b","FREE"],["6","13:00","Thinktank","The Sax Pistols","j","Incl.","Included in Thinktank general admission."],["6","13:00","Military Chef, Sutton Coldfield","Playing Django","g","FREE"],["6","15:00","The Brasshouse","Art Themen Quartet","j","FREE"],["6","18:00","Vagabond","Django Chutney","g","FREE"],["6","19:30","The Three Tuns, Sutton Coldfield","Rich Dickinson's Driving Force","b","FREE"],["6","19:30","Red Lion, West Bromwich","Andres Roots (Estonia)","b","FREE"],["6","19:30","Cradley Heath Library","The Sax Pistols","j","FREE"],["6","20:00","Snobs","Art Themen Quartet","j","FREE"],["7","12:00","Mailbox (Canalside)","Rip Roaring Success","o","FREE"],["7","12:30","Water's Edge Bandstand","Django Chutney","g","FREE"],["7","13:00","Blakesley Hall","Simon Spillett Quartet","j","£3.50"],["7","14:00","New Oscott Village","Walter Smitty & The Unviables","j","FREE"],["7","14:00","The Brasshouse","Let's Talk Buddy Guy","s","FREE","Discussion event: first-hand tales from musicians who met Buddy Guy."],["7","15:00","The Brasshouse","Jamie Thyer & The Worried Men","b","FREE"],["7","17:00","Hilton Garden Inn","Billy Thompson Gypsy Style","g","FREE"],["7","17:00","RPM Analogue Audio, Bearwood","Buddy Guy on Record","s","FREE","Listening event celebrating Buddy Guy's recorded legacy."],["7","18:00","La Bellezza","Roy Forbes","j","FREE*","Reservation required — contact the venue directly."],["7","18:00","Box, Brindleyplace","Buddy Guy on Film","s","FREE","Film screening celebrating Buddy Guy's 90th birthday."],["7","18:30","Novotel","Simon Spillett Quartet","j","FREE"],["7","19:00","Regina's Bar & Restaurant","Rip Roaring Success","o","FREE"],["7","19:30","Great Barr Library","Django Chutney","g","FREE"],["7","19:30","The Gate, Sutton Coldfield","Jamie Thyer & The Worried Men","b","FREE"],["7","20:00","Junction","Ben Toury (France)","o","FREE"],["7","20:00","Snobs","Billy Thompson Gypsy Style","g","FREE"],["8","12:30","Chamberlain Square","Ben Toury (France)","o","FREE"],["8","14:00","New Oscott Village","You're Never Alone With A Uke","s","FREE"],["8","15:00","The Brasshouse","The Too Hot Trio","o","FREE"],["8","18:00","Snobs","Out of the Blue Big Band","j","FREE"],["8","18:30","The Cosy Club","The Too Hot Trio","o","FREE"],["8","18:30","Ash, Sutton Coldfield","Jake Leg Jug Band","j","FREE"],["8","19:00","Bacchus Bar","Chickenbone John & Harmonica Dave","b","FREE"],["8","19:00","Regina's Bar & Restaurant","Jake Henry Trio","j","FREE"],["8","19:00","Aston Hall","Honeyboy Hickling Blues Band","b","£12"],["8","19:00","West Bromwich Indoor Market","Just Doin' It","b","FREE"],["8","19:00","Dartmouth Central Club","Swing Cafe","j","FREE"],["8","19:30","Barbara's Bier Haus","Brad Henshaw","o","FREE"],["8","19:30","Ibis Birmingham Centre","Back on the Road","b","FREE"],["8","19:30","Bromwich Hall","The Sax Pistols","j","FREE"],["8","19:30","Bleakhouse Library","John Hemming & The Jazz Lobbyists","j","FREE"],["8","19:30","The Core Theatre, Solihull","Lady Sings the Blues","j","£20"],["8","19:30","Sutton Coldfield Town Hall","Edgar Macias Piquero Quintet","w","£15"],["8","20:00","Plough & Harrow Hotel","Ben Toury (France)","o","FREE"],["8","20:00","Washworx","Slide Boy Roy","b","FREE"],["9","11:00","Birmingham Indoor Market","Jake Leg Jug Band","j","FREE"],["9","12:00","Bromwich Hall","Florence Joelle","w","FREE"],["9","12:00","Caffe Nero, Brindleyplace","You're Never Alone With A Uke","s","FREE"],["9","13:00","Millennium Point","The Shufflepack","b","FREE"],["9","13:00","Sarehole Mill","Al Nicholls Quartet","j","£3.50"],["9","13:00","Bullring Rag Market","Ben Toury (France)","o","FREE"],["9","13:00","Heavenly Desserts, Sutton Coldfield","The Delta Aces","b","FREE"],["9","14:00","Birmingham Markets Customer Centre","The Sax Pistols","j","FREE"],["9","14:30","Bank Restaurant, Bar & Grill","Sheila Waterfield","j","FREE"],["9","15:00","AC Hotel Mailbox","Roy Forbes Quartet","j","FREE"],["9","15:00","The Brasshouse","Bruce Adams Quartet","j","FREE"],["9","15:00","Millennium Point","Honeyboy Hickling Blues Band","b","FREE"],["9","17:00","The Alchemist, Brindleyplace","The Delta Aces","b","FREE"],["9","17:30","Millennium Point","Brad Henshaw","o","FREE"],["9","17:30","No 18 Coffee House, Tamworth","The Shufflepack","b","FREE"],["9","18:00","Snobs","The Sax Pistols","j","FREE"],["9","19:00","Noel's Bar & Restaurant","Swing Cafe","j","FREE"],["9","19:00","Red Lion, Jewellery Quarter","Al Nicholls Quartet","j","FREE"],["9","19:30","West Bromwich Central Library","Bruce Adams Quartet","j","FREE"],["9","19:45","Millennium Point","Get Loose","b","FREE"],["9","20:00","The Wellington","Ben Toury (France)","o","FREE"],["9","20:00","Plough & Harrow Hotel","Florence Joelle","w","FREE"],["10","12:00","Oak House","Stuart Maxwell's Blues Raiders","b","FREE"],["10","12:30","West Park Bandstand, Wolverhampton","Rich Dickinson's Driving Force","b","FREE"],["10","13:00","Birmingham Museum & Art Gallery","Bruce Adams Quartet","j","FREE"],["10","13:00","Noel's Bar & Restaurant","Sheila Waterfield","j","FREE"],["10","13:00","Bantock House, Wolverhampton","Jake Leg Jug Band","j","FREE"],["10","13:45","Old Joint Stock","Jake Henry","j","FREE"],["10","14:00","Red Lion, West Bromwich","Ben Toury (France)","o","FREE"],["10","14:00","Longbridge Village","Swing Cafe","j","FREE"],["10","15:00","The Brasshouse","Al Nicholls Quartet","j","FREE"],["10","15:00","The School Yard at Boston Tea Party","Chickenbone Blues Band","b","FREE"],["10","17:00","All Bar One","Brad Henshaw","o","FREE"],["10","18:00","O'Neill's, Broad Street","Stuart Maxwell's Blues Raiders","b","FREE"],["10","18:00","The Alchemist, Colmore Row","Swing Cafe","j","FREE"],["10","18:00","Lightwoods House","Ben Toury (France)","o","FREE"],["10","19:00","The Station, Sutton Coldfield","Slide Boy Roy","b","FREE"],["10","19:00","Sandwell Valley Visitor Centre","Smokin' Ade Wakelin Blues Band","b","FREE"],["10","19:00","Thimblemill Library","Al Nicholls Quartet","j","FREE"],["10","20:00","Snobs","Bruce Adams Quartet","j","FREE"]];
+var VD={"1000 Trades on the Park":{"addr":"Lightwoods Park, Bearwood B67 5DP","phone":"0121 638 0451","web":null,"mq":"1000 Trades Lightwoods Park Bearwood B67 5DP"},"AC Hotel Mailbox":{"addr":"The Mailbox, Birmingham B1 1RL","phone":"0121 643 9344","web":"https://www.marriott.com/en-gb/hotels/bhxac-ac-hotel-birmingham","mq":"AC Hotel Birmingham Mailbox B1 1RL"},"Alexandra Theatre Piano Bar":{"addr":"Suffolk Street Queensway, Birmingham B5 4DS","phone":"0333 009 6690","web":"https://www.atgtickets.com/venues/alexandra-theatre-birmingham","mq":"Alexandra Theatre Birmingham B5 4DS"},"All Bar One":{"addr":"Brindleyplace, Birmingham B1 2HL","phone":"0121 643 3157","web":"https://www.allbarone.co.uk","mq":"All Bar One Brindleyplace Birmingham B1 2HL"},"Arcadian":{"addr":"Hurst Street, Birmingham B5 4TD","phone":"0121 622 5348","web":null,"mq":"Arcadian Hurst Street Birmingham B5 4TD"},"Ash, Sutton Coldfield":{"addr":"Birmingham Road, Sutton Coldfield B72 1QD","phone":"0121 805 1925","web":null,"mq":"Ash Bar Sutton Coldfield B72 1QD"},"Aston Hall":{"addr":"Trinity Road, Birmingham B6 6JD","phone":"0121 348 8000","web":"https://www.birminghammuseums.org.uk/aston-hall","mq":"Aston Hall Birmingham B6 6JD"},"Bacchus Bar":{"addr":"Burlington Arcade, Birmingham B2 4JH","phone":"0121 632 5445","web":null,"mq":"Bacchus Bar Burlington Arcade Birmingham B2 4JH"},"Bank Restaurant, Bar & Grill":{"addr":"Brindleyplace, Birmingham B1 2JB","phone":"0121 633 4466","web":"https://www.bankrestaurants.com/restaurants/birmingham","mq":"Bank Restaurant Brindleyplace Birmingham B1 2JB"},"Bantock House, Wolverhampton":{"addr":"Finchfield Road, Wolverhampton WV3 9LQ","phone":"01902 552195","web":"https://www.wolverhamptonart.org.uk/bantock","mq":"Bantock House Wolverhampton WV3 9LQ"},"Bar Estilo":{"addr":"The Mailbox, Birmingham B1 1RF","phone":"0121 643 3443","web":null,"mq":"Bar Estilo Mailbox Birmingham B1 1RF"},"Barbara's Bier Haus":{"addr":"Broad Street, Birmingham B15 1SU","phone":"0121 387 5675","web":null,"mq":"Barbaras Bier Haus Broad Street Birmingham B15 1SU"},"Birmingham Indoor Market":{"addr":"Edgbaston Street, Birmingham B5 4RQ","phone":"0121 303 0208","web":null,"mq":"Birmingham Indoor Market Edgbaston Street B5 4RQ"},"Birmingham Markets Customer Centre":{"addr":"Edgbaston Street, Birmingham B5 4QL","phone":"0121 303 0250","web":null,"mq":"Birmingham Markets Customer Centre Edgbaston Street B5 4QL"},"Birmingham Museum & Art Gallery":{"addr":"Chamberlain Square, Birmingham B3 3DH","phone":"0121 348 8000","web":"https://www.birminghammuseums.org.uk/bmag","mq":"Birmingham Museum Art Gallery Chamberlain Square B3 3DH"},"Blackheath Library":{"addr":"145 High Street, Blackheath B65 0EA","phone":"0121 569 4920","web":null,"mq":"Blackheath Library High Street B65 0EA"},"Blakesley Hall":{"addr":"Blakesley Road, Birmingham B25 8RN","phone":"0121 348 8000","web":"https://www.birminghammuseums.org.uk/blakesley","mq":"Blakesley Hall Birmingham B25 8RN"},"Bleakhouse Library":{"addr":"Bleakhouse Road, Oldbury B68 9DS","phone":"0121 569 4923","web":null,"mq":"Bleakhouse Library Oldbury B68 9DS"},"Botanical Gardens":{"addr":"Westbourne Road, Birmingham B15 3TR","phone":"0121 454 1860","web":"https://www.birminghambotanicalgardens.org.uk","mq":"Birmingham Botanical Gardens B15 3TR"},"Bournville Gardens Village":{"addr":"Bristol Road South, Bournville B31 2FR","phone":"0121 227 9000","web":null,"mq":"Bournville Gardens Village Bristol Road South B31 2FR"},"Bournville Village Green":{"addr":"Bournville, Birmingham B30 1JT","phone":"07880 714716","web":null,"mq":"Bournville Village Green Birmingham B30 1JT"},"Box, Brindleyplace":{"addr":"Water's Edge, Brindleyplace, Birmingham B1 2HL","phone":"0121 269 5700","web":null,"mq":"Box Brindleyplace Birmingham B1 2HL"},"Bromwich Hall":{"addr":"Hall Green Road, West Bromwich B71 2EA","phone":"0121 588 2985","web":null,"mq":"Bromwich Hall West Bromwich B71 2EA"},"Bullring Rag Market":{"addr":"Edgbaston Street, Birmingham B5 4RB","phone":"0121 303 0208","web":null,"mq":"Bullring Rag Market Birmingham B5 4RB"},"Caffe Botanico, Sutton Coldfield":{"addr":"Frasers, Sutton Coldfield B72 1PB","phone":"0121 354 2904","web":null,"mq":"Caffe Botanico Frasers Sutton Coldfield B72 1PB"},"Caffe Nero, Brindleyplace":{"addr":"Brindleyplace, Birmingham B1 2JB","phone":"0121 643 4572","web":"https://www.caffenero.com","mq":"Caffe Nero Brindleyplace Birmingham B1 2JB"},"CBSO Centre":{"addr":"Berkley Street, Birmingham B1 2LF","phone":"0121 616 6500","web":"https://www.cbso.co.uk","mq":"CBSO Centre Berkley Street Birmingham B1 2LF"},"Central Square, Brindleyplace":{"addr":"Brindleyplace, Birmingham B1 2JB","phone":"0121 454 7020","web":"https://www.brindleyplace.com","mq":"Central Square Brindleyplace Birmingham B1 2JB"},"Chamberlain Square":{"addr":"Paradise, Birmingham B3 3AX","phone":"0121 780 3333","web":"https://www.paradise.co.uk","mq":"Chamberlain Square Paradise Birmingham B3 3AX"},"Cote, Solihull":{"addr":"High Street, Solihull B91 3SX","phone":"0121 828 4848","web":"https://www.cote.co.uk","mq":"Cote Solihull High Street B91 3SX"},"Cow & Sow":{"addr":"Paradise, Birmingham B3 3AX","phone":"0121 798 2131","web":null,"mq":"Cow and Sow Paradise Birmingham B3 3AX"},"Cradley Heath Library":{"addr":"Upper High Street, Cradley Heath B64 5JU","phone":"0121 569 4926","web":null,"mq":"Cradley Heath Library Upper High Street B64 5JU"},"Dartmouth Central Club":{"addr":"Devonshire Drive, West Bromwich B71 4AA","phone":"0121 553 1927","web":null,"mq":"Dartmouth Central Club West Bromwich B71 4AA"},"Delta by Marriott":{"addr":"Hagley Road, Birmingham B16 8SJ","phone":"0121 452 1144","web":"https://www.marriott.com","mq":"Delta Hotels Marriott Hagley Road Birmingham B16 8SJ"},"Dishoom":{"addr":"Paradise, Birmingham B3 3AX","phone":"0121 809 5986","web":"https://www.dishoom.com/birmingham","mq":"Dishoom Paradise Birmingham B3 3AX"},"Earlsdon Park Village":{"addr":"Albany Road, Coventry CV5 6JQ","phone":"024 7771 8000","web":null,"mq":"Earlsdon Park Village Albany Road Coventry CV5 6JQ"},"Fighting Cocks, Moseley":{"addr":"St Mary's Row, Moseley B13 8HW","phone":"0121 449 0811","web":null,"mq":"Fighting Cocks Moseley B13 8HW"},"Great Barr Library":{"addr":"Birmingham Road, Great Barr B43 6PF","phone":"0121 569 4929","web":null,"mq":"Great Barr Library Birmingham Road B43 6PF"},"Great Bridge Library":{"addr":"Sheepwash Lane, Tipton DY4 7JF","phone":"0121 569 4930","web":null,"mq":"Great Bridge Library Sheepwash Lane Tipton DY4 7JF"},"Haden Hill House":{"addr":"Halesowen Road, Cradley Heath B64 7JU","phone":"01384 569444","web":null,"mq":"Haden Hill House Cradley Heath B64 7JU"},"Harvey Norman, Sutton Coldfield":{"addr":"Gracechurch Shopping Centre, Sutton Coldfield B72 1PD","phone":"0121 823 0590","web":null,"mq":"Harvey Norman Gracechurch Shopping Centre Sutton Coldfield"},"Heavenly Desserts, Sutton Coldfield":{"addr":"Birmingham Road, Sutton Coldfield B72 1QF","phone":"0121 537 0826","web":null,"mq":"Heavenly Desserts Sutton Coldfield B72 1QF"},"Hilton Garden Inn":{"addr":"Brindleyplace, Birmingham B1 2HW","phone":"0121 643 1003","web":"https://www.hilton.com/en/hotels/bhxbmgi","mq":"Hilton Garden Inn Brindleyplace Birmingham B1 2HW"},"Ibis Birmingham Centre":{"addr":"Ladywell Walk, Birmingham B5 4ST","phone":"0121 622 6010","web":"https://all.accor.com","mq":"Ibis Birmingham Centre Ladywell Walk B5 4ST"},"Junction":{"addr":"High Street, Harborne B17 9PT","phone":"0121 428 2635","web":null,"mq":"The Junction High Street Harborne B17 9PT"},"La Bellezza":{"addr":"Paradise, Birmingham B3 3AX","phone":"020 4578 4370","web":null,"mq":"La Bellezza Paradise Birmingham B3 3AX"},"Lightwoods House":{"addr":"Bearwood, Birmingham B67 5DP","phone":"0121 569 4141","web":null,"mq":"Lightwoods House Bearwood Birmingham B67 5DP"},"Longbridge Village":{"addr":"Austin Way, Rednal B45 8TD","phone":"0121 272 4000","web":null,"mq":"Longbridge Village Austin Way Rednal B45 8TD"},"Mailbox (Canalside)":{"addr":"The Mailbox, Birmingham B1 1RS","phone":"0121 632 1000","web":"https://www.mailbox.co.uk","mq":"Mailbox Birmingham B1 1RS"},"Millennium Point":{"addr":"Curzon Street, Birmingham B4 7XG","phone":"0121 202 2200","web":"https://www.millenniumpoint.org.uk","mq":"Millennium Point Curzon Street Birmingham B4 7XG"},"Military Chef, Sutton Coldfield":{"addr":"Gracechurch Shopping Centre, Sutton Coldfield B72 1PA","phone":"","web":null,"mq":"Military Chef Gracechurch Shopping Centre Sutton Coldfield"},"Moseley All Services Club":{"addr":"Church Road, Birmingham B13 9EA","phone":"0121 389 3766","web":null,"mq":"Moseley All Services Club Church Road Birmingham B13 9EA"},"Museum Collection Centre":{"addr":"Dollman Street, Birmingham B7 4RQ","phone":"0121 348 8231","web":"https://www.birminghammuseums.org.uk","mq":"Birmingham Museum Collection Centre Dollman Street B7 4RQ"},"New Inn Harborne":{"addr":"Harborne, Birmingham B17 0DJ","phone":"0121 792 6027","web":null,"mq":"New Inn Harborne Birmingham B17 0DJ"},"New Oscott Village":{"addr":"Fosseway Drive, Chester Road B23 5LD","phone":"0121 377 5000","web":null,"mq":"New Oscott Village Chester Road Birmingham B23 5LD"},"New Square, West Bromwich":{"addr":"Cronehills Linkway, West Bromwich B70 7PP","phone":"0121 647 7040","web":null,"mq":"New Square West Bromwich B70 7PP"},"No 18 Coffee House, Tamworth":{"addr":"Lichfield Street, Tamworth B79 7QD","phone":"01827 64161","web":null,"mq":"No 18 Coffee House Tamworth B79 7QD"},"Noel's Bar & Restaurant":{"addr":"Waterfront Walk, Birmingham B1 1SN","phone":"0121 389 3896","web":null,"mq":"Noels Bar Restaurant Waterfront Walk Birmingham B1 1SN"},"Novotel":{"addr":"Broad Street, Birmingham B1 2HT","phone":"0121 619 9002","web":"https://www.novotel.com","mq":"Novotel Birmingham Broad Street B1 2HT"},"O'Neill's, Broad Street":{"addr":"Broad Street, Birmingham B1 2HG","phone":"0121 616 1623","web":null,"mq":"ONeills Broad Street Birmingham B1 2HG"},"Oak House":{"addr":"Oak Road, West Bromwich B70 8HJ","phone":"0121 553 0759","web":null,"mq":"Oak House West Bromwich B70 8HJ"},"Old Joint Stock":{"addr":"Temple Row, Birmingham B2 5NY","phone":"0121 200 1892","web":"https://www.oldjointstock.co.uk","mq":"Old Joint Stock Temple Row Birmingham B2 5NY"},"Omnom, Jewellery Quarter":{"addr":"Fleet Street, Birmingham B3 1JH","phone":"07387 142842","web":null,"mq":"Omnom Fleet Street Birmingham B3 1JH"},"Plough & Harrow Hotel":{"addr":"Hagley Road, Birmingham B16 8LS","phone":"0333 003 4274","web":"https://www.ploughandharrowhotel.co.uk","mq":"Plough and Harrow Hotel Hagley Road Birmingham B16 8LS"},"The Queen's Head, Steelhouse Lane":{"addr":"28 Steelhouse Lane, Birmingham B4 6BJ","phone":"0121 236 0345","web":null,"mq":"Queens Head Steelhouse Lane Birmingham B4 6BJ"},"Radisson Blu":{"addr":"Holloway Circus, Birmingham B1 1BT","phone":"0121 654 6000","web":"https://www.radissonblu.com/en/hotel-birmingham","mq":"Radisson Blu Birmingham Holloway Circus B1 1BT"},"Red Lion, Jewellery Quarter":{"addr":"Warstone Lane, Birmingham B18 6NG","phone":"0121 233 9144","web":null,"mq":"Red Lion Warstone Lane Birmingham B18 6NG"},"Red Lion, West Bromwich":{"addr":"All Saints Way, West Bromwich B71 1RH","phone":"0121 588 2304","web":null,"mq":"Red Lion All Saints Way West Bromwich B71 1RH"},"Regina's Bar & Restaurant":{"addr":"Newhall Street, Birmingham B3 3NY","phone":"0121 392 2955","web":null,"mq":"Reginas Bar Restaurant Newhall Street Birmingham B3 3NY"},"RPM Analogue Audio, Bearwood":{"addr":"Bearwood Road, Bearwood B66 4BE","phone":"07939 968588","web":null,"mq":"RPM Analogue Audio Bearwood Road B66 4BE"},"Saint Paul's Market, Jewellery Quarter":{"addr":"Mary Ann Street, Birmingham B3 1RL","phone":"","web":null,"mq":"Saint Pauls Market Mary Ann Street Birmingham B3 1RL"},"Samai Thai":{"addr":"Mary Ann Street, Birmingham B3 1RL","phone":"0121 661 0347","web":null,"mq":"Samai Thai Mary Ann Street Birmingham B3 1RL"},"Sandwell Valley Visitor Centre":{"addr":"Salters Lane, West Bromwich B71 4BG","phone":"0121 569 3070","web":"https://www.sandwell.gov.uk/sandwellvalley","mq":"Sandwell Valley Visitor Centre Salters Lane West Bromwich B71 4BG"},"Sarehole Mill":{"addr":"Cole Bank Road, Birmingham B13 0BD","phone":"0121 348 8160","web":"https://www.birminghammuseums.org.uk/sarehole","mq":"Sarehole Mill Cole Bank Road Birmingham B13 0BD"},"School of Art, BCU":{"addr":"Margaret Street, Birmingham B3 3DX","phone":"07809 356411","web":"https://www.bcu.ac.uk","mq":"Birmingham City University School of Art Margaret Street B3 3DX"},"Silver Tree Bakery, Sutton Coldfield":{"addr":"Gracechurch Shopping Centre, Sutton Coldfield B76 9BG","phone":"0121 748 6455","web":null,"mq":"Silver Tree Bakery Gracechurch Shopping Centre Sutton Coldfield"},"Snobs":{"addr":"Broad Street, Birmingham B15 1SU","phone":"0121 643 5551","web":null,"mq":"Snobs Birmingham Broad Street B15 1SU"},"Sutton Coldfield Town Hall":{"addr":"Upper Clifton Road, Sutton Coldfield B73 6DA","phone":"0121 296 9543","web":null,"mq":"Sutton Coldfield Town Hall Upper Clifton Road B73 6DA"},"Terrace Suite, Botanical Gardens":{"addr":"Westbourne Road, Birmingham B15 3TR","phone":"0121 454 1860","web":"https://www.birminghambotanicalgardens.org.uk","mq":"Birmingham Botanical Gardens Westbourne Road B15 3TR"},"The Alchemist, Brindleyplace":{"addr":"Brindleyplace, Birmingham B1 2HL","phone":"0121 794 2164","web":"https://thealchemist.uk.com/venues/birmingham-brindleyplace","mq":"The Alchemist Brindleyplace Birmingham B1 2HL"},"The Alchemist, Colmore Row":{"addr":"Colmore Row, Birmingham B3 2BS","phone":"0121 200 2377","web":"https://thealchemist.uk.com/venues/birmingham-colmore-row","mq":"The Alchemist Colmore Row Birmingham B3 2BS"},"The Brasshouse":{"addr":"Broad Street, Birmingham B1 2HP","phone":"0121 633 3383","web":null,"mq":"The Brasshouse Broad Street Birmingham B1 2HP"},"The Cosy Club":{"addr":"Brindleyplace, Birmingham B1 2HL","phone":"0121 546 0438","web":"https://www.cosyclub.co.uk","mq":"Cosy Club Brindleyplace Birmingham B1 2HL"},"The Core Theatre, Solihull":{"addr":"Touchwood, Solihull B91 3RG","phone":"0121 704 6962","web":"https://www.thecoretheatresolihull.co.uk","mq":"Core Theatre Touchwood Solihull B91 3RG"},"The Duke Inn, Sutton Coldfield":{"addr":"Duke Street, Sutton Coldfield B72 1RJ","phone":"0121 355 1767","web":null,"mq":"Duke Inn Duke Street Sutton Coldfield B72 1RJ"},"The Exchange":{"addr":"Centenary Square, Birmingham B1 2DR","phone":"07814 062984","web":null,"mq":"The Exchange Centenary Square Birmingham B1 2DR"},"The Gate, Sutton Coldfield":{"addr":"Mill Street, Sutton Coldfield B72 1TJ","phone":"0121 272 5499","web":null,"mq":"The Gate Mill Street Sutton Coldfield B72 1TJ"},"The School Yard at Boston Tea Party":{"addr":"High Street, Harborne B17 9NJ","phone":"0121 820 0099","web":"https://bostonteaparty.co.uk","mq":"Boston Tea Party Harborne High Street B17 9NJ"},"The Station, Sutton Coldfield":{"addr":"Station Street, Sutton Coldfield B73 6AT","phone":"0121 362 4961","web":null,"mq":"The Station Sutton Coldfield B73 6AT"},"The Three Tuns, Sutton Coldfield":{"addr":"High Street, Sutton Coldfield B72 1XS","phone":"0121 355 2996","web":null,"mq":"Three Tuns Sutton Coldfield High Street B72 1XS"},"The Wellington":{"addr":"Bennetts Hill, Birmingham B2 5SN","phone":"0121 269 4112","web":null,"mq":"The Wellington Bennetts Hill Birmingham B2 5SN"},"Thimblemill Library":{"addr":"Thimblemill Road, Smethwick B67 5RJ","phone":"0121 569 4943","web":null,"mq":"Thimblemill Library Thimblemill Road Smethwick B67 5RJ"},"Thinktank":{"addr":"Millennium Point, Curzon Street, Birmingham B4 7XG","phone":"0121 348 8000","web":"https://www.birminghammuseums.org.uk/thinktank","mq":"Thinktank Birmingham Curzon Street B4 7XG"},"Vagabond":{"addr":"Colmore Row, Birmingham B3 3BD","phone":"020 8609 7842","web":null,"mq":"Vagabond Colmore Row Birmingham B3 3BD"},"Victorian Tea Rooms, Sutton Coldfield":{"addr":"Sutton Coldfield B72 1PA","phone":"07399 718908","web":null,"mq":"Victorian Tea Rooms Sutton Coldfield B72 1PA"},"Vieni, Jewellery Quarter":{"addr":"41 Pitsford Street, Birmingham B18 6LJ","phone":"0121 806 0080","web":null,"mq":"Vieni 41 Pitsford Street Birmingham B18 6LJ"},"Washworx":{"addr":"Hurst Street, Birmingham B5 6SE","phone":"0121 798 1383","web":null,"mq":"Washworx Hurst Street Birmingham B5 6SE"},"Water's Edge Bandstand":{"addr":"Brindleyplace, Birmingham B1 2JB","phone":"0121 454 7020","web":"https://www.brindleyplace.com","mq":"Waters Edge Bandstand Brindleyplace Birmingham B1 2JB"},"Wednesbury Library":{"addr":"Walsall Street, Wednesbury WS10 9EH","phone":"0121 569 4945","web":null,"mq":"Wednesbury Library Walsall Street WS10 9EH"},"Wednesbury Museum & Art Gallery":{"addr":"Holyhead Road, Wednesbury WS10 7DF","phone":"0121 556 0683","web":null,"mq":"Wednesbury Museum Art Gallery Holyhead Road WS10 7DF"},"West Bromwich Central Library":{"addr":"High Street, West Bromwich B70 8DZ","phone":"0121 569 4900","web":null,"mq":"West Bromwich Central Library High Street B70 8DZ"},"West Bromwich Indoor Market":{"addr":"High Street, West Bromwich B70 7NN","phone":"0121 553 3074","web":null,"mq":"West Bromwich Indoor Market High Street B70 7NN"},"West Midlands Police Museum":{"addr":"Steelhouse Lane, Birmingham B4 6BJ","phone":"","web":"https://www.trybooking.com/uk/events/landing/113801","mq":"West Midlands Police Museum Steelhouse Lane Birmingham B4 6BJ"},"West Park Bandstand, Wolverhampton":{"addr":"West Park, Wolverhampton WV1 4PN","phone":"","web":null,"mq":"West Park Bandstand Wolverhampton WV1 4PN"},"Winterbourne House & Garden":{"addr":"Edgbaston Park Road, Birmingham B15 2RT","phone":"0121 414 3003","web":"https://www.winterbourne.org.uk","mq":"Winterbourne House Garden Birmingham B15 2RT"}};
+var BD={"Al Nicholls Quartet":"Swinging, warm-toned tenor sax in the 1940s–50s Texas Tenors tradition. After Leeds College of Music, Al played with The Big Town Playboys, King Pleasure and Ray Gelato; he now leads his own quartet and hosts a twice-monthly residency at Soho's Spice of Life Club.","Alan Barnes Quartet":"Prolific international performer on clarinet, alto and baritone sax. Sessions with Charlie Watts, Bryan Ferry, Jools Holland and Jamie Cullum; tours with Ruby Braff, Freddie Hubbard and Scott Hamilton. Over 30 British Jazz Awards; twice named BBC Jazz Musician of the Year.","Andres Roots (Estonia)":"Estonian slide guitar wizard celebrating 30 years as a musician in 2026, alongside his 50th birthday. Has played everywhere from Morgan Freeman's Ground Zero Blues Club in Mississippi to the German parliament, and topped the charts in Estonia. Festival debut in 2024 was acclaimed as a masterclass in fluid acoustic blues.","Anvil Chorus":"West Midlands Barbershop Harmony Club, formed 1977 and based in Great Barr. Performs four-part barbershop arrangements; recent winners at Dudley Music Festival. A registered charity; meets Tuesday evenings at the Beacon Church in Pheasey — new members always welcome.","Art Themen Quartet":"Over 60 years on the jazz scene, with a career alongside Alexis Korner, Stan Tracey and American giants including Arturo Sandoval — all while working as a consultant orthopaedic surgeon. Recipient of a Worshipful Company of Musicians lifetime achievement award. Still astonishing audiences at 86.","Back on the Road":"Rock, pop and blues classics delivered with crowd-pleasing energy. Tony O'Brien (vocals), Richard Fedeski (piano), Ray Sweeney and Stevie Barr (guitars), Bill Jefferson (drums). Particular favourites at Birmingham Rocks at Snobs.","B.D. Lenz (USA)":"American jazz guitarist whose funky, virtuosic music has appeared on hundreds of TV shows worldwide. With James Rosocha (bass) and Joe Falcey (drums), the trio mixes jazz standards, original grooves and reimagined pop classics. A regular stop on their extended European tours.","Ben Toury (France)":"French pianist, harmonica player, singer and composer — a whirlwind of modern boogie. Self-taught; opened for Bob Brozman at Le Creusot Blues Festival aged 13. Touring Europe and the USA ever since; planning Volume 4 of Wild Boogie-Woogie in 2026.","Billy Thompson Gypsy Style":"Violin virtuoso, twice Young Jazz Musician, and former key member of Barbara Thompson's Paraphernalia. Has played alongside Gary Potter, John Etheridge, Martin Taylor and Howard Alden. Programme: Hot Club classics, fiery Hungarian tunes, unusual covers and originals.","Birmingham Big Band with Suzi Woods":"17-piece big band under John Ruddick playing popular and contemporary big band jazz. Quarterly residency at Moseley All Services Club with distinguished guests. Festival vocalist Suzi Woods is always a crowd favourite.","Birmingham: A City Rooted in Talent":"Documentary series by D.G. Torrens and Martin Tracey, spotlighting Birmingham's creative heritage through archival footage and interviews. Covers musicians, broadcasters, sports personalities and cultural pioneers — from Black Sabbath and Duran Duran and many more.","Brad Henshaw":"Birmingham-born singer-songwriter who has collaborated with Whitney Houston, Buddy Guy, Blur, Richard Ashcroft, UB40, Rod Stewart and Shirley Bassey. A distinctive Americana and Southern Rock sound shaped by significant time in the USA.","Bruce Adams Quartet":"One of the most spectacular trumpet techniques in British jazz and a long-standing festival favourite. A 30-year association with Alan Barnes and a track record alongside jazz greats on both sides of the Atlantic. Now partnered with Eclipse Trumpets.","Buddy Guy on Film":"Special screening at Box, Brindleyplace celebrating Buddy Guy's 90th birthday on Buddy Guy Day. Buddy first played Birmingham in 1964 and has headlined at this festival with his Buddy Guy/Junior Wells Chicago Blues Band.","Buddy Guy on Record":"Listening event at RPM Analogue Audio exploring the recorded legacy of Buddy Guy who turns 90 today. Around 40 albums, nine Grammy Awards, and an 18-month Damn Right Farewell World Tour that ended in 2024.","Chickenbone John & Harmonica Dave":"The Godfather of the Cigar Box Guitar; star of the BBC documentary Cigar Box Blues and organiser of the annual Boxstock Festival. Recreates the raw sound of the Mississippi juke joints alongside longtime collaborator Harmonica Dave.","Chickenbone Blues Band":"Chickenbone John leads his full blues band in the raw Delta tradition. He starred in the BBC documentary Cigar Box Blues and organises the annual Boxstock Festival.","The Buskateers":"Tim and Billy busking for West Midlands charities with friends Pete Wain, Bleak December, Alan Warden and Tony Edwards. Old blues, jazz and skiffle via washboard, kazoo, whistles and banjo.","The Delta Aces":"Delta and Chicago Blues duo with eight years of festival and club experience across the UK and abroad. Heartfelt vocals, expert guitar and soulful harmonica — likened to Sonny Terry and Brownie McGhee. New album Educated Man praised for its vintage, authentic sound.","Dirt Road Band":"Steve Walwyn (guitar/vocals — Dr Feelgood, 32 years), Horace Panter (bass — founding Specials member) and Ted Duggan (drums — Banco de Gaia, Badfinger). Hard, punchy blues-rock; critically acclaimed debut album Righteous released July 2024.","Django Chutney":"Brighton-based gypsy-jazz trio since 2021. Three-part vocal harmonies, virtuosic guitar and an infectious sense of fun across jazz, blues, folk and more. 'All ages and all musical tastes will find something to enjoy.'","Edgar Macias Piquero Quintet":"Venezuelan-born pianist and musical director; one of the Midlands' leading figures in jazz, Latin jazz and salsa. Quintet: Chris Bowden (sax), Tom Hill (bass/vocals), Miles Levin (drums), Nestor Pedrales (congas). Acclaimed for vibrant Buena Vista Social Club reinterpretations.","Florence Joelle":"Paris-born jazz singer, songwriter and harmonica player based in London. Albums blend French chanson, classic jazz, gypsy folk and fifties R&B. Songs broadcast on BBC Radio (twice Song of the Week on BBC Introducing), Jazz FM and digital stations worldwide.","Get Loose":"High-energy Oxfordshire-based blues rock band. Lee Castle (guitar) and Paul Ashby (harmonica) channel classic rock fused with blues. 'A melting pot of great lyrics and a swagger that will have you playing it over and over.'","Hit Parade Heroes":"Warren James and band celebrate the 1950s and 60s British Hit Parade: Tommy Steele, Joe Brown, Lonnie Donegan plus American stars including Johnny Cash, Eddie Cochran and Gene Vincent. Over two hours of musical nostalgia.","Honeyboy Hickling Blues Band":"Rocking post-war Chicago-style blues. Honeyboy (harmonica/vocals) toured with Steve Marriott and recorded with Bo Diddley. Guitarist Bob Wilson played with Idle Race and Ruby Turner. Tony Baylis served with Chicken Shack. Impeccable pedigrees, top-class musicianship.","Hot Club of Halifax":"Acclaimed jazz and swing band from Halifax. Christine Pickard (clarinet), Vernon Bigsby (lead guitar), Gerard Paul Camallari (rhythm guitar/vocals) and Grant Russell (bass). Use clarinet rather than violin for jazz manouche and swing standards.","Jake Henry":"Multi-instrumentalist and songwriter appearing as pianist and vocalist. Influenced by Stevie Wonder, Ray Charles and Bill Withers.","Jake Henry Trio":"Multi-instrumentalist appearing as pianist and vocalist with his trio. Influenced by Stevie Wonder, Ray Charles and Bill Withers.","Jake Leg Jug Band":"Authentic sounds of 1920s America: jazz, blues, ragtime and gospel; songs of murder, betrayal, gambling and redemption. 14 years on the road, nearly 800 gigs, 10 albums and BBC Radio 2 airplay.","James Oliver Band":"Wales's James Oliver (300+ gigs a year, UK Blues Awards Emerging Artist 2020) paired with bass legend Norman Watt Roy (Ian Dury and the Blockheads, Wilko Johnson) and drummer Mark Kemlo.","Jamie Thyer & The Worried Men":"Regarded as a guitarist's guitarist; toured alongside Chicken Shack, Robin Trower, Robert Cray, Peter Green and Johnny Winter. Latest album Excelsior earned Record of the Week on Radio Caroline. 'British blues guitar men? There's Eric Clapton, Peter Green... and Jamie Thyer!'","Jazz & Blues Murder Mystery Night":"Play detective at the Victorian Lock-Up (West Midlands Police Museum) with a jazz and blues theme. See the murder scene, interview suspects and solve the crime. Teams up to 6; over-18s only. Book at trybooking.com/uk/GMIZ.","John Hemming & The Jazz Lobbyists":"Former MP for Birmingham Yardley, now researching molecular biology. An accomplished jazz pianist who assembles a fine band for melodic jazz, with vocalist Lorraine Olley.","Jukebox Rhythm Orchestra":"13-piece band from Coventry under Mark Allison. Swings through Benny Goodman and Ella Fitzgerald to Caro Emerald and Big Bad Voodoo Daddy — mainstream hits from the 1920s to the present day.","Jump Jive & Wail":"Halifax-based, 20 years raising the roof at festivals, dancehalls and jazz clubs. Boogie woogie piano, honking sax, exuberant harmonica and 3-part vocal harmonies; music from the 1940s and early 50s dance floor.","Just Doin' It":"Status Quo tribute band formed 2023. Growing repertoire of classic Quo hits from their 60-year career, capturing the feel of a live Quo show. Popular at venues from Weymouth Pavilion to Snobs Birmingham.","King Pleasure & The Biscuit Boys":"40 years and nearly 7,000 performances in 27 countries. Opened for BB King, Cab Calloway and Ray Charles; toured with the Blues Brothers Band. 11 albums on Big Bear Records. 'The unequivocal Kings of Swing.'","Lady Sings the Blues":"39 years celebrating the music of Billie Holiday. Val Wiseman is the finest interpreter of Billie's songs. Band includes Bruce Adams (trumpet), Ian Bateman (trombone), Dave Newton (piano) and Dave Green (bass).","Let's Talk Buddy Guy":"Discussion event celebrating Buddy Guy's 90th birthday: first-hand tales from musicians who shared a stage with one of the all-time blues greats.","Miho Hazama (Japan/USA)":"Multi-Grammy-nominated composer performing at the CBSO Centre with CBSO musicians, saxophonist Soweto Kinch, Tom Farmer, Shane Forbes and Ivo Neame. Original compositions alongside Herbie Hancock and Thelonious Monk — a thrilling journey through jazz past and present.","Out of the Blue Big Band":"18-piece Birmingham ensemble under Jo James. Classic big-band swing alongside Sinatra and Buble, Santana, Elton John, Oasis and Nirvana. Outstanding soloists and a rich brass-and-sax sound.","Photography Workshop":"Free workshop led by festival photographer Merlin Daleman — twice winner of the Dutch Silver Camera Award for best documentary photographer. Open to all levels.","Playing Django":"Birmingham-based festival regulars. Music based on the Quintet of the Hot Club of France, inspired by the great Django Reinhardt.","Rich Dickinson's Driving Force":"Nearly three decades on the electric blues circuit; toured extensively across the UK, Europe and the US. Well-crafted originals alongside classics from Joe Bonamassa, Rory Gallagher, Gary Moore and ZZ Top.","Rip Roaring Success":"Wild Miss Lucille (double bass), Miss Jay (fiddle) and Rusty (guitar). Western swing, rockabilly and bluegrass: Dolly Parton to Hank Williams to Elvis Presley. 'Will make you think you're in an authentic Texas dance hall.'","Roy Forbes":"Immaculate jazz vocalist whose devotion began with Nat King Cole. Has shared stages with Scott Hamilton, Benny Waters, Al Casey and Sweets Edison. A huge following at festivals worldwide including Brecon, Greenwich and St Lucia. Note: reservation required at La Bellezza.","Roy Forbes Quartet":"Roy Forbes with his full quartet: immaculate jazz vocals inspired by Nat King Cole, with a superb jazz backing band.","Royal Blues":"Hard-hitting rock and roll newcomers. Debut single picked up for an Amazon/Apple TV documentary. Three-part female harmonies cutting through dirty riffs and stomping rhythms.","The Sax Pistols":"New Orleans marching band tradition with a British twist: Second Line grooves meet Ska. Songs from Stevie Wonder via Madness to Miles Davis. Always audience-interactive. Album: Never Mind the Baroques.","The Shakedown Brothers":"Blues-rock powerhouse from the Midlands. Gritty originals and reimagined classics with energy that shakes the room. Touring blues pubs and clubs across England.","Sheila Waterfield":"UK vocalist, composer and band leader drawing on jazz, blues, soul, folk and Latin. Has appeared at London's Jazz Cafe, Ronnie Scott's and the CBS Arena. New composition Nothing Without Love forthcoming in 2026.","The Shufflepack":"Birmingham favourites. Stuart Maxwell and Tom Domagala (frontmen), Chris Lloyd (drums), Barney Nikolic (guitar). Swinging, shuffling blues and jive: honking sax, wailing harp and irresistible grooves.","Simon Spillett Quartet":"Marking 30 years on the UK jazz scene in 2026. Powerful, straight-ahead tenor sax in the tradition of the late Tubby Hayes. Sold-out Ronnie Scott's gigs; five-star debut CD Dear Tubby H. in Jazzwise.","Singitbig":"Community choir from Chorley run by Debbie Jones and Karen Strickland — no auditions. A fun, positive ensemble performing popular classics and jazzy numbers at venues from weddings to festival stages.","Slide Boy Roy":"One of the toughest boogie blues rock bands on the circuit, West Midlands-based since 2005. Over 25 years touring Europe, the USA and the UK alongside Mungo Jerry, Canned Heat and Arthur Brown.","Smokin' Ade Wakelin & Andy Hiseman":"Ade Wakelin (blues guitar, Texas and Chicago influences) with guitarist Andy Hiseman of the Barflys. A blues duo drawing on T-Bone Walker and Jimmy Vaughan traditions.","Smokin' Ade Wakelin Blues Band":"Red-hot Texas and Chicago Blues shuffles with Hammond Organ Grooves, Funk, Soul and Jazz. Joe Masterson on Hammond organ is the defining live element.","Stacy Mitchhart (USA)":"American blues guitarist and songwriter from Cincinnati. Shared stages with James Brown, Keb Mo, Buddy Guy and John Entwistle. Winner of the Albert King Guitar Player Award and multiple Music City Blues Society awards.","Strictly Jitterbug":"A festival institution. Alistair Fitzgerald leads East Coast Swing, Jitterbug, Jive and 1920s Charleston for all levels. He also uses dance in patients' rehabilitation. Come along and have a go!","Stuart Maxwell's Blues Raiders":"Hard-edged, rocking blues. Stuart Maxwell (harmonica and Hammond), Matt Edwards (guitar), Derek White (bass — Bernie Marsden), Jason Reeve (drums). Muddy Waters and Howlin' Wolf alongside the Allman Brothers.","Swing Cafe":"Popular Midlands swing and jazz band led by singer Billie Baker. The best-loved songs of the era from the 1920s to the 1950s.","The Too Hot Trio":"Billy, Rusty and Helen from Liverpool play Western Swing and Rockabilly — Bob Wills and Carl Perkins. Electric guitar, acoustic guitar and double bass. 'Guaranteed to get the joint jumping.'","Tipitina":"Powerhouse singer Debbie Jones (gospel roots) with Justin Randall, the finest New Orleans-style pianist outside of Louisiana. The music of Dr John, James Booker, Professor Longhair and Fats Domino. 'A barnstorming live act.'","Tom Lindsay":"Pianist, singer, bandleader and songwriter who blends musicianship with easy charm. Also performs with the 18-piece State 51 Swing Orchestra. Highlights include Montreux, Bologna and events for Schwarzenegger and De Niro.","Walter Smitty":"Popular Midlands performer playing acoustic Latin, jazz, blues and classic pop.","Walter Smitty & The Unviables":"Popular Midlands band playing acoustic Latin, jazz, blues and classic pop. Joined by international singer Suzi Woods, whose career includes performing for the Beckhams and Princess Caroline of Monaco.","You're Never Alone With A Uke":"Ukulele workshop for complete beginners. Jules takes players from open strings through to a full 12-bar blues on supplied instruments. Fun, practical and welcoming at all levels."};
+
+/* ── state ── */
+var state={members:null,colors:null,picks:null,me:null};
+var uiDay="0",uiGf={},uiExp=-1,uiView="cal",uiCopied=false;
+
+/* ── URL encoding ── */
+function encSt(){try{return btoa(JSON.stringify({m:state.members,c:state.colors,p:state.picks}));}catch(e){return "";}}
+function decSt(s){try{var d=JSON.parse(atob(s));if(d&&d.m&&d.p)return d;}catch(e){}return null;}
+function pushSt(){var e=encSt();if(e)try{history.replaceState(null,"","#s="+e);}catch(x){}}
+
+/* ── init ── */
+(function(){
+  var hash=window.location.hash;
+  if(hash&&hash.slice(0,3)==="#s="){var dec=decSt(hash.slice(3));if(dec){state.members=dec.m;state.colors=dec.c;state.picks=dec.p;}}
+  if(!state.members){state.members=DM.slice();state.colors=JSON.parse(JSON.stringify(MC));state.picks={};}
+  state.members.forEach(function(m){if(!state.picks[m])state.picks[m]=[];});
+  var saved=null;try{saved=localStorage.getItem("bjbf_me");}catch(e){}
+  if(saved&&state.members.indexOf(saved)>=0){state.me=saved;draw();}else{showSetup();}
+})();
+
+/* ── helpers ── */
+function he(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
+function isFree(p){return p==="FREE"||p==="FREE*";}
+function mInit(m){return m?m.charAt(0).toUpperCase():"?";}
+function mCol(m){return state.colors[m]||"#374151";}
+function hasPick(m,i){return state.picks[m]&&state.picks[m].indexOf(i)>=0;}
+function whoWants(i){var o=[];state.members.forEach(function(m){if(hasPick(m,i))o.push(m);});return o;}
+function hasKeys(o){for(var k in o){if(Object.prototype.hasOwnProperty.call(o,k))return true;}return false;}
+
+/* ── setup overlay ── */
+var setupSel=null;
+function showSetup(){setupSel=null;renderSetup();}
+function renderSetup(){
+  var ov=document.getElementById("ov");
+  ov.style.display="flex";
+  var mg="";
+  state.members.forEach(function(m){
+    var col=mCol(m),sel=setupSel===m;
+    mg+="<div class='mopt"+(sel?" mopt-sel":"")+"' data-m='"+he(m)+"' onclick='selSetup(this.dataset.m)' style='"+
+        (sel?"background:"+col+";border-color:"+col+";color:#fff":"border-color:#e2d9cc")+
+        "'><div style='font-size:1.2rem;margin-bottom:3px'>"+mInit(m)+"</div>"+
+        "<div style='font-size:.82rem;font-weight:600'>"+he(m)+"</div></div>";
+  });
+  ov.innerHTML="<div class='setup-box'>"+
+    "<h2>&#127926; Who are you?</h2>"+
+    "<p>Choose your name to track your picks. Share the link and everyone's choices appear together.</p>"+
+    "<div class='mgrid'>"+mg+"</div>"+
+    "<div class='crow'><input id='cn' type='text' placeholder='Add another name...' maxlength='20'><button onclick='addCustom()'>Add</button></div>"+
+    "<button class='okbtn' id='okbtn' onclick='confirmSetup()'"+(!setupSel?" disabled":"")+">Continue as "+(setupSel?he(setupSel):"...")+"</button>"+
+    "</div>";
+}
+function selSetup(name){setupSel=name;renderSetup();}
+function addCustom(){
+  var inp=document.getElementById("cn");
+  var nm=inp?inp.value.trim():"";
+  if(!nm)return;
+  if(state.members.indexOf(nm)<0){
+    state.members.push(nm);state.picks[nm]=[];
+    var fc=["#0891b2","#be185d","#0d9488","#c2410c","#7c3aed"];
+    state.colors[nm]=fc[(state.members.length-1)%fc.length];
+  }
+  setupSel=nm;renderSetup();
+}
+function confirmSetup(){
+  if(!setupSel)return;
+  state.me=setupSel;
+  try{localStorage.setItem("bjbf_me",state.me);}catch(e){}
+  document.getElementById("ov").style.display="none";
+  pushSt();draw();
+}
+
+/* ── main draw ── */
+function draw(){renderMbar();renderNav();if(uiView==="cal")renderCal();else if(uiView==="my")renderMy();else renderFam();renderLeg();}
+
+/* ── member bar ── */
+function renderMbar(){
+  var h="<span class='mbar-lbl'>You are:</span>";
+  state.members.forEach(function(m){
+    var col=mCol(m),isMe=m===state.me;
+    h+="<button class='mpill' data-m='"+he(m)+"' onclick='switchMe(this.dataset.m)' style='border-color:"+col+";background:"+(isMe?col:"transparent")+";color:"+(isMe?"#fff":col)+"'>"+(isMe?"&#10003; ":"")+he(m)+"</button>";
+  });
+  h+="<button class='madd' onclick='showSetup()'>+ Add person</button>";
+  document.getElementById("mbar").innerHTML=h;
+}
+function switchMe(nm){state.me=nm;try{localStorage.setItem("bjbf_me",nm);}catch(e){}draw();}
+
+/* ── nav ── */
+function renderNav(){
+  var navy="#0c1a2e",gold="#e8c87a";
+  var myC=state.me&&state.picks[state.me]?state.picks[state.me].length:0;
+  function nb(lbl,v){var a=uiView===v;return "<button class='mnbtn' onclick='sv(\""+v+"\")' style='background:"+(a?gold:"transparent")+";color:"+(a?navy:"#94a3b8")+";border:none'>"+lbl+"</button>";}
+  document.getElementById("mn").innerHTML=nb("&#128197; Calendar","cal")+nb("&#9733; My Picks"+(myC?" ("+myC+")":""),"my")+nb("&#128106; Family View","fam");
+}
+
+/* ── calendar ── */
+function renderCal(){
+  var gold="#e8c87a",navy="#0c1a2e";
+  var evs=[];for(var i=0;i<R.length;i++){if(R[i][0]===uiDay&&(!hasKeys(uiGf)||uiGf[R[i][4]]))evs.push(i);}
+  var di=null;for(var k=0;k<DS.length;k++){if(DS[k][0]===uiDay){di=DS[k];break;}}
+  if(!di)di=DS[0];
+  /* days strip */
+  var h="<div class='days'>";
+  DS.forEach(function(d){
+    var a=d[0]===uiDay;
+    h+="<button class='dbtn' onclick='sd(\""+d[0]+"\")' style='background:"+(a?gold:"transparent")+";color:"+(a?navy:"#94a3b8")+";font-weight:"+(a?700:400)+"'>"+he(d[1])+(d[2]?"<span class='ds'>"+he(d[2])+"</span>":"")+"</button>";
+  });
+  h+="</div>";
+  /* genre filter */
+  h+="<div class='gfrow'><span class='gflbl'>Filter:</span>";
+  ["j","b","o","g","w","s"].forEach(function(k){
+    var gv=G[k],a=!!uiGf[k];
+    h+="<button class='gpill' onclick='tg(\""+k+"\")' style='border-color:"+gv.c+";background:"+(a?gv.c:"transparent")+";color:"+(a?"#fff":gv.c)+"'>"+gv.e+" "+he(gv.l)+"</button>";
+  });
+  if(hasKeys(uiGf))h+="<button class='clrbtn' onclick='cg()'>&#10005; Clear</button>";
+  h+="</div>";
+  /* day heading */
+  h+="<div class='dayh'><span class='dayh-t'>"+he(di[1])+"</span>";
+  if(di[2])h+=" <span class='dayh-s'>"+he(di[2])+"</span>";
+  h+="<span class='dayh-c'>"+evs.length+" event"+(evs.length!==1?"s":"")+" &bull; Tap to expand &bull; &#9733; to pick</span></div>";
+  h+="<div class='evlist'>";
+  if(!evs.length)h+="<div class='noevent'>No events match your filter.</div>";
+  evs.forEach(function(i){h+=cardHtml(i);});
+  h+="</div>";
+  document.getElementById("ct").innerHTML=h;
+}
+
+/* ── my picks ── */
+function renderMy(){
+  var myP=state.me&&state.picks[state.me]?state.picks[state.me]:[];
+  var fe=[];for(var i=0;i<R.length;i++){if(myP.indexOf(i)>=0)fe.push(i);}
+  var col=state.me?mCol(state.me):"#0c1a2e";
+  var h="<div class='ph'><h2 style='color:"+col+"'>"+he(state.me||"Your")+"'s picks &mdash; "+fe.length+" event"+(fe.length!==1?"s":"")+"</h2>"+
+    "<button class='copybtn' onclick='cp()' style='background:"+col+"'>"+(uiCopied?"&#10003; Copied!":"&#128203; Copy for WhatsApp")+"</button></div>";
+  if(!fe.length){h+="<div class='empty'><div style='font-size:2rem;margin-bottom:8px'>&#9734;</div>No picks yet.<br><span style='font-size:.8rem;margin-top:6px;display:inline-block'>Tap &#9733; in the Calendar tab to pick events.</span></div>";}
+  else{
+    h+="<div style='padding:4px 10px 20px'>";
+    DS.forEach(function(d){
+      var de=fe.filter(function(i){return R[i][0]===d[0];});
+      if(!de.length)return;
+      h+="<div class='dlbl'>"+he(d[1])+(d[2]?" &bull; "+he(d[2]):"")+"</div>";
+      de.forEach(function(i){h+=cardHtml(i);});
+    });
+    h+="</div>";
+  }
+  document.getElementById("ct").innerHTML=h;
+}
+
+/* ── family view ── */
+function renderFam(){
+  var h="<div class='ph'><h2>Family View &mdash; all picks</h2></div>";
+  h+="<div style='padding:4px 10px 6px'>";
+  state.members.forEach(function(m){
+    var c=(state.picks[m]||[]).length;
+    h+="<div class='fv-m'><div class='fv-dot' style='background:"+mCol(m)+"'></div><span class='fv-nm' style='color:"+mCol(m)+"'>"+he(m)+"</span><span class='fv-ct'>"+c+" pick"+(c!==1?"s":"")+"</span></div>";
+  });
+  h+="</div>";
+  var ap={};
+  state.members.forEach(function(m){(state.picks[m]||[]).forEach(function(i){ap[i]=true;});});
+  var ai=Object.keys(ap).map(Number).sort(function(a,b){
+    var da=parseInt(R[a][0],10),db=parseInt(R[b][0],10);
+    if(da!==db)return da-db;return R[a][1].localeCompare(R[b][1]);
+  });
+  if(!ai.length){h+="<div class='empty'><div style='font-size:2rem;margin-bottom:8px'>&#128106;</div>No picks yet.<br><span style='font-size:.8rem;margin-top:6px;display:inline-block'>Each person picks events in the Calendar, then share the link so everyone's choices appear here.</span></div>";}
+  else{
+    h+="<div style='padding:4px 10px 20px'>";
+    DS.forEach(function(d){
+      var de=ai.filter(function(i){return R[i][0]===d[0];});
+      if(!de.length)return;
+      h+="<div class='dlbl'>"+he(d[1])+(d[2]?" &bull; "+he(d[2]):"")+"</div>";
+      de.forEach(function(i){h+=cardHtml(i);});
+    });
+    h+="</div>";
+  }
+  document.getElementById("ct").innerHTML=h;
+}
+
+/* ── event card ── */
+function cardHtml(idx){
+  var e=R[idx],gk=e[4],p=e[5],note=e[6]||"";
+  var gv=G[gk];
+  var fr=isFree(p),isInc=p==="Incl.";
+  var pBg=fr?"#d1fae5":(isInc?"#f3f4f6":"#dbeafe");
+  var pCol=fr?"#065f46":(isInc?"#374151":"#1e40af");
+  var isExp=uiExp===idx;
+  var myPick=hasPick(state.me,idx);
+  var bdr=myPick?"2px solid "+mCol(state.me):"1px solid #e2d9cc";
+  var ww=whoWants(idx);
+
+  /* star button */
+  var sb="";
+  if(state.me){
+    var mc=mCol(state.me);
+    sb="<div class='srow'><button class='sbtn' onclick='event.stopPropagation();tf("+idx+")' style='color:"+(myPick?mc:"#d1d5db")+"' title='"+(myPick?"Remove":"Add to my picks")+"'>&#9733;</button></div>";
+  }
+
+  var h="<div class='card' style='border:"+bdr+"'>";
+  h+="<div class='cmain' onclick='te("+idx+")'>";
+  h+="<div class='tb'><div class='ti'>"+he(e[1])+"</div><div class='gi'>"+gv.e+"</div></div>";
+  h+="<div class='inf'><div class='an'>"+he(e[3])+"</div>";
+  h+="<div class='vn'>"+he(e[2]);
+  if(p==="FREE*")h+=" <span style='color:#b45309;font-size:.64rem;font-style:italic'>&bull; Reservation required</span>";
+  h+="</div>";
+  if(ww.length){
+    h+="<div class='wdots'>";
+    ww.forEach(function(m){h+="<span class='wdot' style='background:"+mCol(m)+"'>"+he(mInit(m))+"</span>";});
+    h+="</div>";
+  }
+  h+="</div>";
+  h+="<span class='prtag' style='background:"+pBg+";color:"+pCol+"'>"+he(p)+"</span>";
+  h+=sb;
+  h+="</div>"; /* cmain */
+
+  if(isExp){
+    h+="<div class='expbox'>";
+    /* genre badge */
+    h+="<div class='exprow'><span class='gbadge' style='background:"+gv.bg+";color:"+gv.c+"'>"+gv.e+" "+he(gv.l)+"</span></div>";
+    /* note */
+    if(note)h+="<div class='expnote'>"+he(note)+"</div>";
+    /* artist bio */
+    var bio=BD[e[3]]||"";
+    if(bio)h+="<div class='bio'>"+he(bio)+"</div>";
+    /* venue block */
+    var vd=VD[e[2]];
+    var mq=encodeURIComponent(vd?vd.mq:e[2]+", Birmingham");
+    h+="<div class='vblock'>";
+    h+="<div class='vb-name'>"+he(e[2])+"</div>";
+    if(vd){
+      h+="<div class='vb-addr'>"+he(vd.addr)+"</div>";
+      if(vd.phone)h+="<div class='vb-phone'>&#128222; "+he(vd.phone)+"</div>";
+    }
+    h+="<div class='vlinks'>";
+    h+="<a class='vl vl-g' href='https://www.google.com/maps/search/?api=1&query="+mq+"' target='_blank' rel='noopener'>&#128205; Google Maps</a>";
+    h+="<a class='vl vl-a' href='https://maps.apple.com/?q="+mq+"' target='_blank' rel='noopener'>&#62; Apple Maps</a>";
+    if(vd&&vd.web)h+="<a class='vl vl-w' href='"+he(vd.web)+"' target='_blank' rel='noopener'>&#127760; Website</a>";
+    h+="</div></div>"; /* vlinks, vblock */
+    h+="</div>"; /* expbox */
+  }
+  h+="</div>"; /* card */
+  return h;
+}
+
+/* ── legend ── */
+function renderLeg(){
+  var h="<h3>GENRE LEGEND</h3><div class='legrow'>";
+  ["j","b","o","g","w","s"].forEach(function(k){
+    var gv=G[k];h+="<span class='lgi'><span class='lgb' style='background:"+gv.bg+";color:"+gv.c+"'>"+gv.e+"</span> "+he(gv.l)+"</span>";
+  });
+  h+="</div><div class='legprow'>";
+  h+="<span class='legp'><span class='lgb' style='background:#d1fae5;color:#065f46'>FREE</span> Free admission</span>";
+  h+="<span class='legp'><span class='lgb' style='background:#dbeafe;color:#1e40af'>&pound;X</span> Ticketed &mdash; price shown</span>";
+  h+="<span class='legp'><span class='lgb' style='background:#d1fae5;color:#065f46'>FREE*</span> Free but reservation required</span>";
+  h+="<span class='legp'><span class='lgb' style='background:#f3f4f6;color:#374151'>Incl.</span> Included in venue admission</span>";
+  h+="<span class='legp'>Coloured initial dot = another family member wants this</span>";
+  h+="</div>";
+  document.getElementById("lg").innerHTML=h;
+}
+
+/* ── actions ── */
+function sv(v){uiView=v;uiExp=-1;draw();}
+function sd(d){uiDay=d;uiExp=-1;draw();}
+function tg(k){if(uiGf[k])delete uiGf[k];else uiGf[k]=true;draw();}
+function cg(){uiGf={};draw();}
+function te(i){uiExp=(uiExp===i)?-1:i;draw();}
+function tf(i){
+  if(!state.me)return;
+  var a=state.picks[state.me]||(state.picks[state.me]=[]);
+  var p=a.indexOf(i);if(p>=0)a.splice(p,1);else a.push(i);
+  pushSt();draw();
+}
+
+/* ── share ── */
+function shareLink(){
+  pushSt();
+  var url=window.location.href;
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(function(){alert("Link copied!\n\nPaste it into WhatsApp or email. When anyone opens it they will see all current picks and can add their own.");}).catch(function(){prompt("Copy this link:",url);});
+  }else{prompt("Copy this link:",url);}
+}
+
+/* ── whatsapp copy ── */
+function cp(){
+  var myP=state.me&&state.picks[state.me]?state.picks[state.me]:[];
+  if(!myP.length){alert("No picks yet!");return;}
+  var lines=he(state.me)+"'s BJBF 2026 picks:\n\n";
+  DS.forEach(function(d){
+    var de=myP.filter(function(i){return R[i][0]===d[0];});
+    if(!de.length)return;
+    lines+=d[1]+(d[2]?" ("+d[2]+")":"")+":\n";
+    de.forEach(function(i){lines+="  "+R[i][1]+" "+G[R[i][4]].e+" "+R[i][3]+" @ "+R[i][2]+" - "+R[i][5]+"\n";});
+    lines+="\n";
+  });
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(lines).then(function(){uiCopied=true;draw();setTimeout(function(){uiCopied=false;draw();},2500);}).catch(function(){fbCopy(lines);});
+  }else{fbCopy(lines);}
+}
+function fbCopy(txt){
+  var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";ta.style.top="-9999px";
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand("copy");uiCopied=true;draw();setTimeout(function(){uiCopied=false;draw();},2500);}
+  catch(e){alert("Could not auto-copy.\n\n"+txt);}
+  document.body.removeChild(ta);
+}
+
+</script>
+</body>
+</html>

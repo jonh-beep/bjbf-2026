@@ -306,10 +306,20 @@ function renderPerf(){
     var idxs=pm[name];
     var isExp=uiPerfExp===name;
     var bio=BD[name]||"";
-    h+="<div class='card' style='margin-bottom:6px'>";
+    var myCount=state.me?idxs.filter(function(i){return hasPick(state.me,i);}).length:0;
+    var famWants={};
+    idxs.forEach(function(i){whoWants(i).forEach(function(m){famWants[m]=true;});});
+    var famMembers=Object.keys(famWants);
+    var mc=state.me?mCol(state.me):"#374151";
+    var cardBdr=myCount?"border:2px solid "+mc:"border:1px solid #e2d9cc";
+    h+="<div class='card' style='margin-bottom:6px;"+cardBdr+"'>";
     h+="<div class='cmain' data-p='"+he(name)+"' onclick='tperf(this.dataset.p)'>";
     h+="<div class='inf'><div class='an'>"+he(name)+"</div>";
-    h+="<div class='vn'>"+idxs.length+" performance"+(idxs.length!==1?"s":"")+"</div></div>";
+    h+="<div class='vn'>"+idxs.length+" performance"+(idxs.length!==1?"s":"");
+    if(myCount)h+=" &mdash; <span style='color:"+mc+";font-weight:700'>&#9733; "+myCount+" picked</span>";
+    h+="</div>";
+    if(famMembers.length){h+="<div class='wdots' style='margin-top:3px'>";famMembers.forEach(function(m){h+="<span class='wdot' style='background:"+mCol(m)+"'>"+he(mInit(m))+"</span>";});h+="</div>";}
+    h+="</div>";
     h+="<span style='font-size:.9rem;color:#94a3b8;flex-shrink:0'>"+(isExp?"&#9650;":"&#9660;")+"</span>";
     h+="</div>";
     if(isExp){
@@ -325,13 +335,18 @@ function renderPerf(){
         var gv=G[e[4]],p=e[5],fr=isFree(p),isInc=p==="Incl.";
         var pBg=fr?"#d1fae5":(isInc?"#f3f4f6":"#dbeafe");
         var pCol=fr?"#065f46":(isInc?"#374151":"#1e40af");
-        h+="<div class='pg-row'>";
+        var myPick=hasPick(state.me,idx);
+        var ww=whoWants(idx);
+        var rowBg=myPick?(MB[state.me]||"#f0f9ff"):"";
+        h+="<div class='pg-row'"+(rowBg?" style='background:"+rowBg+"'":"")+">";
         h+="<div class='tb'><div class='ti'>"+he(e[1])+"</div><div class='gi'>"+gv.e+"</div></div>";
         h+="<div class='inf'>";
         h+="<div class='pg-date'>"+he(di?di[1]:"")+(di&&di[2]?" <span class='pg-sub'>"+he(di[2])+"</span>":"")+"</div>";
         h+="<div class='vn'>"+he(e[2])+"</div>";
+        if(ww.length){h+="<div class='wdots'>";ww.forEach(function(m){h+="<span class='wdot' style='background:"+mCol(m)+"'>"+he(mInit(m))+"</span>";});h+="</div>";}
         h+="</div>";
         h+="<span class='prtag' style='background:"+pBg+";color:"+pCol+"'>"+he(p)+"</span>";
+        if(state.me){h+="<div class='srow'><button class='sbtn' onclick='event.stopPropagation();tf("+idx+")' style='color:"+(myPick?mc:"#d1d5db")+"' title='"+(myPick?"Remove pick":"Add to my picks")+"'>&#9733;</button></div>";}
         h+="</div>";
       });
       h+="</div>";
